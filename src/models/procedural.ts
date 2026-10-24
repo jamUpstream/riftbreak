@@ -62,6 +62,10 @@ const oct=(x:number,y:number,z:number,sx:number,sy=sx,sz=sx,rx=0,ry=0,rz=0)=>pla
 const cyl=(x:number,y:number,z:number,r:number,h:number,rx=0,ry=0,rz=0)=>placed(new THREE.CylinderGeometry(r,r*.82,h,5),x,y,z,1,1,1,rx,ry,rz);
 const cone=(x:number,y:number,z:number,r:number,h:number,rx=0,ry=0,rz=0)=>placed(new THREE.ConeGeometry(r,h,5),x,y,z,1,1,1,rx,ry,rz);
 const torus=(x:number,y:number,z:number,r:number,t:number,rx=0,ry=0,rz=0)=>placed(new THREE.TorusGeometry(r,t,5,12),x,y,z,1,1,1,rx,ry,rz);
+const limb=(ax:number,ay:number,az:number,bx:number,by:number,bz:number,r:number)=>{
+ const start=new THREE.Vector3(ax,ay,az),end=new THREE.Vector3(bx,by,bz),direction=end.clone().sub(start),length=direction.length(),geometry=new THREE.CylinderGeometry(r,r*.72,length,5),rotation=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize()),matrix=new THREE.Matrix4().compose(start.add(end).multiplyScalar(.5),rotation,new THREE.Vector3(1,1,1));
+ const compatible=geometry.index?geometry.toNonIndexed():geometry;if(compatible!==geometry)geometry.dispose();return compatible.applyMatrix4(matrix);
+};
 
 /** Distinct, low-poly silhouettes while retaining a single instanced draw per archetype. */
 function enemyGeometryDetailed(shape:string){
@@ -144,7 +148,7 @@ export function enemyGeometry(shape:string){
 /** Every named boss receives a unique primitive-built silhouette. */
 export function bossGeometry(id:string){
  const p:Primitive[]=[];
- const legs=(count:number,rx:number,rz:number,y:number,length:number,thick=.13)=>{for(let i=0;i<count;i++){const a=i/count*Math.PI*2;p.push(cyl(Math.sin(a)*rx,y,Math.cos(a)*rz,thick,length,Math.cos(a)*.88,0,-Math.sin(a)*.88));}};
+ const legs=(count:number,rx:number,rz:number,y:number,length:number,thick=.13)=>{for(let i=0;i<count;i++){const a=i/count*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),hipX=sx*rx*.58,hipZ=sz*rz*.58,kneeX=sx*(rx+length*.54),kneeZ=sz*(rz+length*.42),footX=sx*(rx+length),footZ=sz*(rz+length*.82);p.push(limb(hipX,y,hipZ,kneeX,y*.72,kneeZ,thick*1.18),limb(kneeX,y*.72,kneeZ,footX,.12,footZ,thick),oct(footX,.12,footZ,thick*2.5,thick*1.35,thick*3.2));}};
  const armoredBeast=()=>{p.push(ico(0,1.02,.15,1.65,.88,1.55),box(0,1.42,.25,1.38,.38,1.38),ico(0,1.03,-1.12,.82,.62,.72));legs(6,1.2,.72,.4,1.18,.16)};
  switch(id){
   case 'scrap-brute': armoredBeast();p.push(box(-.48,1.78,.05,.62,.34,.82,0,0,.18),box(.42,1.7,.12,.9,.3,.66,0,0,-.12),cone(-.42,1.05,-1.72,.22,.94,-Math.PI/2,0,-.22),cone(.42,1.05,-1.72,.22,.94,-Math.PI/2,0,.22));break;
@@ -162,7 +166,7 @@ export function bossGeometry(id:string){
   case 'echo-knight': p.push(ico(0,1.04,.18,1.0,.62,1.25),ico(0,1.38,-.92,.62,.58,.72),cone(-.76,1.02,-1.05,.22,1.65,-.35,0,-.68),cone(.76,1.02,-1.05,.22,1.65,-.35,0,.68));legs(6,.82,.65,.32,.95,.11);p.push(cone(-.3,1.92,-.66,.12,.72,0,0,-.28),cone(.3,1.92,-.66,.12,.72,0,0,.28));break;
   case 'gravity-seer': p.push(ico(0,1.65,0,1.18),ico(0,1.65,0,.54),torus(0,1.65,0,1.5,.12,Math.PI/2,.35),torus(0,1.65,0,1.15,.1,.3,0,Math.PI/2));for(let i=0;i<6;i++){const a=i/6*Math.PI*2;p.push(cone(Math.sin(a)*.68,.55,Math.cos(a)*.62,.1,1.3,0,0,-Math.sin(a)*.48));}break;
   case 'hollow-crown': p.push(ico(0,1.48,0,1.08,.78,1.02),torus(0,1.72,0,1.18,.15,Math.PI/2));for(let i=0;i<7;i++){const a=i/7*Math.PI*2;p.push(cone(Math.sin(a)*.96,2.42,Math.cos(a)*.96,.22,1.35,0,0,-a));p.push(cone(Math.sin(a)*.62,.52,Math.cos(a)*.55,.1,1.18,0,0,-Math.sin(a)*.5));}p.push(oct(0,1.48,-.58,.48));break;
-  case 'chrono-widow': p.push(ico(0,1.08,0,1.25,.68,1.42),ico(0,1.52,-1.08,.65,.62,.82),torus(0,1.25,.1,1.15,.11,Math.PI/2),cone(0,1.62,-1.78,.28,.92,-Math.PI/2));legs(8,1.18,.92,.42,1.55,.12);break;
+  case 'chrono-widow': p.push(placed(new THREE.DodecahedronGeometry(.72,0),0,1.18,.48,1.9,1.28,2.2),ico(0,1.48,-1.32,.92,.72,1.02),oct(0,1.5,-1.96,.72,.5,.82),torus(0,1.28,.35,1.52,.16,Math.PI/2),torus(0,1.28,.35,1.12,.1,.35,0,Math.PI/2),torus(0,1.28,.35,.76,.08,-.35,0,Math.PI/2),cone(-.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,-.18),cone(.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,.18));legs(8,1.58,1.15,.62,2.05,.18);for(let i=0;i<8;i++){const a=i/8*Math.PI*2;p.push(cone(Math.sin(a)*1.48,2.05,Math.cos(a)*1.1+.35,.16,.92,0,0,-a));}break;
   default: armoredBeast();
  }
  return merged(p);

@@ -1,4 +1,4 @@
-const CACHE_NAME='riftbreak-protocol-v1.0.2';
+const CACHE_NAME='riftbreak-protocol-v1.0.3';
 const APP_SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
 
 self.addEventListener('message',event=>{if(event.data==='SKIP_WAITING')self.skipWaiting()});
