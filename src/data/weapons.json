@@ -1,10 +1,10 @@
 [
- {"id":"rapid-pistol","name":"Rapid Pistol","damage":9,"fireRate":5.2,"speed":25,"type":"physical","perk":"burst","color":"#ffd46a"},
- {"id":"cinder-wand","name":"Cinder Wand","damage":16,"fireRate":2.4,"speed":18,"type":"elemental","perk":"splatter","status":"ignite","color":"#ff6845"},
- {"id":"frost-orb","name":"Frost Orb","damage":18,"fireRate":1.7,"speed":14,"type":"elemental","perk":"ricochet","status":"chill","color":"#6ee7ff"},
- {"id":"longbolt","name":"Longbolt","damage":27,"fireRate":1.2,"speed":34,"type":"physical","perk":"pierce","status":"mark","color":"#a5b8ff"},
- {"id":"scatter-cannon","name":"Scatter Cannon","damage":10,"fireRate":1.1,"speed":16,"type":"physical","perk":"scatter","color":"#c2f2cd"},
- {"id":"twin-blades","name":"Twin Blades","damage":18,"fireRate":2.2,"speed":0,"type":"physical","perk":"salvo","melee":true,"color":"#e299ff"},
- {"id":"arc-lantern","name":"Arc Lantern","damage":14,"fireRate":2.8,"speed":20,"type":"elemental","perk":"ricochet","color":"#7df4dd"},
- {"id":"rail-needle","name":"Rail Needle","damage":32,"fireRate":0.9,"speed":40,"type":"physical","perk":"pierce","color":"#ff9f6e"}
+ {"id":"rapid-pistol","name":"Rapid Pistol","damage":4.3,"fireRate":3.8,"speed":24,"type":"physical","perk":"burst","color":"#ffd46a"},
+ {"id":"cinder-wand","name":"Cinder Wand","damage":8,"fireRate":1.8,"speed":17,"type":"elemental","perk":"splatter","status":"ignite","color":"#ff6845"},
+ {"id":"frost-orb","name":"Frost Orb","damage":9,"fireRate":1.35,"speed":13,"type":"elemental","perk":"ricochet","status":"chill","color":"#6ee7ff"},
+ {"id":"longbolt","name":"Longbolt","damage":14,"fireRate":0.8,"speed":32,"type":"physical","perk":"pierce","status":"mark","color":"#a5b8ff"},
+ {"id":"scatter-cannon","name":"Scatter Cannon","damage":5,"fireRate":0.9,"speed":15,"type":"physical","perk":"scatter","color":"#c2f2cd"},
+ {"id":"twin-blades","name":"Twin Blades","damage":8,"fireRate":1.5,"speed":0,"type":"physical","perk":"salvo","melee":true,"color":"#e299ff"},
+ {"id":"arc-lantern","name":"Arc Lantern","damage":8,"fireRate":2,"speed":19,"type":"elemental","perk":"ricochet","color":"#7df4dd"},
+ {"id":"rail-needle","name":"Rail Needle","damage":17,"fireRate":0.7,"speed":37,"type":"physical","perk":"pierce","color":"#ff9f6e"}
 ]

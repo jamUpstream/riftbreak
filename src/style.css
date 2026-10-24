@@ -14,7 +14,7 @@
 .card-summary,.card-detail{height:100%}.card-detail{display:none;padding:14px 8px;border:1px solid color-mix(in srgb,var(--h),transparent 45%);background:#07100eb8}.upgrade-card.selected .card-summary{display:none}.upgrade-card.selected .card-detail{display:block}.card-detail>small{font-size:8px;letter-spacing:.15em;color:var(--h)}.card-detail p{margin-top:16px;font-size:11px;line-height:1.55}.card-detail p strong{display:block;margin-top:16px;padding-top:12px;border-top:1px solid #ffffff20;color:#e9f3ed;font:700 10px 'Chakra Petch';line-height:1.7}.tag-row{display:flex;flex-wrap:wrap;gap:4px}.upgrade-card p b{color:#edf8f1}.upgrade-card .card-summary>.stars{position:absolute;bottom:16px;left:15px}
 .card-countdown{display:inline-grid;place-items:center;width:38px;height:38px;margin:3px 10px 0;border:1px solid #6ef1ff88;border-radius:50%;color:var(--cyan);background:#0a1715;font:800 18px 'Barlow Condensed';box-shadow:0 0 16px #6ef1ff20;vertical-align:middle}.card-countdown.urgent{color:#ff7863;border-color:#ff7863;animation:countdown-pulse .7s infinite alternate}@keyframes countdown-pulse{to{transform:scale(1.09);box-shadow:0 0 22px #ff5f4755}}
 /* Results */
-.result-screen{height:100vh;background:radial-gradient(circle at 50% 36%,#243b33,#0b1210 55%)}.results{height:100%;display:grid;place-content:center;text-align:center;min-width:min(92vw,760px)}.result-sigil{font:800 80px 'Barlow Condensed';color:var(--cyan);height:95px}.result-sigil.loss{color:#d75d48}.results>small{letter-spacing:.27em;color:var(--amber)}.results h2{font:800 clamp(42px,7vw,78px)/1 'Barlow Condensed';margin:4px}.results>p{color:#879a91}.result-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:20px 0}.result-stats span{padding:20px;border:1px solid var(--line);background:#ffffff06}.result-stats small,.result-stats b{display:block}.result-stats small{font-size:8px;color:#84978f}.result-stats b{font:800 26px 'Barlow Condensed';margin-top:5px}.progress-report{text-align:left;margin-bottom:18px}.progress-report span{font-size:11px}.progress-report .stars{float:right}.results>button{background:var(--amber);color:#121b17;padding:17px;font:800 18px 'Barlow Condensed'}
+.result-screen{height:100vh;background:radial-gradient(circle at 50% 36%,#243b33,#0b1210 55%)}.results{height:100%;display:grid;place-content:center;text-align:center;min-width:min(92vw,760px)}.result-sigil{font:800 80px 'Barlow Condensed';color:var(--cyan);height:95px}.result-sigil.loss{color:#d75d48}.results>small{letter-spacing:.27em;color:var(--amber)}.results h2{font:800 clamp(42px,7vw,78px)/1 'Barlow Condensed';margin:4px}.results>p{color:#879a91}.result-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:20px 0}.result-stats span{padding:20px;border:1px solid var(--line);background:#ffffff06}.result-stats small,.result-stats b{display:block}.result-stats small{font-size:8px;color:#84978f}.result-stats b{font:800 26px 'Barlow Condensed';margin-top:5px}.progress-report{text-align:left;margin-bottom:18px}.progress-report span{font-size:11px}.progress-report .stars{float:right}.result-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.result-actions button{min-height:54px;padding:13px 18px;font:800 18px 'Barlow Condensed';letter-spacing:.04em}.result-actions .next-stage{background:var(--amber);color:#121b17}.result-actions .next-stage small{display:block;margin-top:2px;font:700 8px 'Chakra Petch';letter-spacing:.12em}.result-actions .result-menu{background:#17231f;color:#dce9e3;border:1px solid #ffffff26}
 @media(max-width:820px){.menu-dossier{opacity:.28;right:-10%;width:55vw}.menu-actions{grid-template-columns:1fr 1fr;right:20px}.menu-actions .hero-button{grid-column:1/-1}.stage-layout{grid-template-columns:1fr}.stage-list{padding-bottom:8px}.stage-brief{padding-top:15px}.stage-art{display:none}.character-layout{grid-template-columns:92px 1fr}.character-model{display:none}.character-rail b{display:none}.character-rail{padding:12px 8px}.character-rail button{grid-template-columns:1fr}.dossier{padding:25px 18px}.card-screen{overflow:auto;display:block}.card-grid{grid-template-columns:repeat(2,1fr);margin:14px 0}.upgrade-card{height:245px}.card-screen footer{position:sticky;bottom:0;background:#09110f;padding:8px;flex-wrap:wrap}.card-screen footer button{min-width:90px;flex:1}.hud-top{grid-template-columns:1fr 1fr 48px}.hp-cluster>div:last-child{width:28vw}.run-clock .phase-track{display:none}.result-stats{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.menu-screen{padding:22px}.brand h1{font-size:51px}.menu-actions{left:22px;bottom:60px}.menu-actions button{min-height:58px;padding:10px}.menu-actions button span{font-size:16px}.menu-actions .hero-button{min-height:68px}.menu-dossier{display:none}.menu-screen footer{left:22px;right:22px}.stage-list{padding:18px}.stage-brief{padding:22px}.character-layout{grid-template-columns:70px 1fr}.stat-grid{grid-template-columns:1fr 1fr}.ability-line,.star-modules{grid-template-columns:1fr}.talent-tree>div{grid-template-columns:22px 1fr}.talent-tree button{font-size:7px}.card-grid{grid-template-columns:1fr 1fr}.upgrade-card{height:220px;padding:12px}.card-icon{width:42px;height:42px;margin:8px 0;font-size:21px}.upgrade-card h3{font-size:18px}.upgrade-card p{font-size:8px;margin-top:8px}.joystick{width:105px;height:105px}.dash{width:96px;height:96px}.skill{width:74px;height:74px;right:112px;bottom:125px}.action span{font-size:27px}.result-stats span{padding:13px}}
 @media(orientation:landscape) and (max-height:600px){.brand h1{font-size:55px}.menu-actions{bottom:32px}.menu-actions button{min-height:50px;padding:8px 14px}.portrait-shape{height:48vh;min-height:180px}.titlebar{height:62px}.stage-layout,.character-layout{min-height:calc(100vh - 62px)}.character-model .lowpoly-avatar{height:70vh}.dossier{max-height:calc(100vh - 62px);padding-top:18px}.dossier h3{font-size:33px}.stat-grid span{padding:5px}.ability-line{margin:5px 0}.card-screen{padding:12px 45px}.card-screen h2{font-size:27px}.upgrade-card{height:58vh;padding:12px}.card-icon{width:45px;height:45px;margin:8px 0}.upgrade-card p{margin-top:9px}.joystick{width:92px;height:92px;bottom:18px}.dash{width:92px;height:92px;bottom:18px}.skill{width:68px;height:68px;right:112px;bottom:93px}.level-badge{bottom:5px}}
@@ -354,6 +354,34 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}b
  .run-clock{width:auto;padding:1px 3px 3px}
  .run-clock>b{font-size:16px}
  .run-clock>small{font-size:6px}
+}
+
+/* Wide layouts show the complete five-card hand. Horizontal swiping remains
+   available on phone and compact-landscape layouts. */
+@media (min-width:1000px){
+ .card-screen .card-grid{
+  width:min(100%,1480px);
+  max-width:1480px;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  grid-auto-flow:row;
+  grid-auto-columns:auto;
+  overflow-x:hidden;
+  padding-inline:0;
+  scrollbar-width:none;
+ }
+ .card-screen .card-grid::-webkit-scrollbar{display:none}
+ .card-screen .upgrade-card{width:100%;min-width:0}
+ .card-screen.weapon-draft .card-grid{
+  width:min(100%,880px);
+  max-width:880px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+ }
+ .card-screen.weapon-upgrade-draft .card-grid{
+  width:min(100%,760px);
+  max-width:760px;
+  grid-template-columns:repeat(2,minmax(220px,330px));
+  justify-content:center;
+ }
 }
 
 /* Installable app control */
