@@ -1,0 +1,12 @@
+[
+ {"id":"husk","name":"Husk","role":"Swarm","hp":20,"atk":5,"speed":2,"threat":1,"shape":"husk","color":"#91a49a","spawnWeight":10,"appearsAfter":0},
+ {"id":"darter","name":"Darter","role":"Runner","hp":10,"atk":4,"speed":4.5,"threat":1,"shape":"darter","color":"#ffb52e","spawnWeight":3,"appearsAfter":15},
+ {"id":"hexcaster","name":"Hexcaster","role":"Ranged","hp":25,"atk":8,"speed":1.5,"threat":2,"shape":"caster","color":"#9d72ff","spawnWeight":2.6,"appearsAfter":50},
+ {"id":"hulk","name":"Hulk","role":"Tank","hp":150,"atk":15,"speed":1,"threat":3,"shape":"hulk","color":"#c9544b","spawnWeight":1.1,"appearsAfter":110},
+ {"id":"aegis","name":"Aegis","role":"Guardian","hp":80,"atk":10,"speed":1.4,"threat":3,"shape":"aegis","color":"#64c9d8","spawnWeight":1,"appearsAfter":145},
+ {"id":"lure","name":"Lure","role":"Bonus","hp":15,"atk":0,"speed":2.5,"threat":1,"shape":"lure","color":"#f5df64","spawnWeight":0.45,"appearsAfter":30},
+ {"id":"spitter","name":"Spitter","role":"Hazard","hp":40,"atk":6,"speed":1.8,"threat":2,"shape":"spitter","color":"#71d36b","spawnWeight":1.8,"appearsAfter":80},
+ {"id":"siege-walker","name":"Siege Walker","role":"Artillery","hp":220,"atk":12,"speed":1.2,"threat":4,"shape":"walker","color":"#6684ad","spawnWeight":0.55,"appearsAfter":240},
+ {"id":"splitter","name":"Splitter","role":"Divider","hp":50,"atk":7,"speed":2,"threat":2,"shape":"splitter","color":"#ff7c48","spawnWeight":1.3,"appearsAfter":125},
+ {"id":"phantom","name":"Phantom","role":"Teleporter","hp":35,"atk":10,"speed":3,"threat":3,"shape":"phantom","color":"#dc72e7","spawnWeight":0.9,"appearsAfter":190}
+]

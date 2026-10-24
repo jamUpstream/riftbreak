@@ -1,0 +1,8 @@
+[
+ {"id":"rustfield","name":"Rustfield Yard","subtitle":"Iron remembers every impact.","theme":"Junkyard","mult":1,"sky":"#17231f","ground":"#342b20","primary":"#d36a2f","accent":"#ffd36b","bosses":["scrap-brute","wire-stalker","crane-colossus"]},
+ {"id":"marsh","name":"Hollow Marsh","subtitle":"The water is listening.","theme":"Toxic swamp","mult":1.4,"sky":"#101d18","ground":"#193b2d","primary":"#62a14b","accent":"#b7f35b","bosses":["bog-hurler","spore-matron","mire-leviathan"]},
+ {"id":"ridge","name":"Glasswind Ridge","subtitle":"Cold enough to fracture sound.","theme":"Frozen cliffs","mult":1.9,"sky":"#12232c","ground":"#1c3d4a","primary":"#58b7cf","accent":"#c4f5ff","bosses":["frost-warden","shard-weaver","avalanche-titan"]},
+ {"id":"foundry","name":"Ember Foundry","subtitle":"Every machine wants fuel.","theme":"Lava factory","mult":2.6,"sky":"#261514","ground":"#40201b","primary":"#e64d32","accent":"#ffb14a","bosses":["slag-golem","furnace-priest","forge-tyrant"]},
+ {"id":"spire","name":"Null Spire","subtitle":"Gravity has forgotten its oath.","theme":"Void tower","mult":3.5,"sky":"#171329","ground":"#2d2444","primary":"#8d64d6","accent":"#e0a6ff","bosses":["echo-knight","gravity-seer","hollow-crown"]},
+ {"id":"endless","name":"Endless Drift","subtitle":"No horizon. No mercy.","theme":"Rotating arenas","mult":1,"sky":"#0b171b","ground":"#172c31","primary":"#38a8ac","accent":"#d4ff9f","bosses":["random","random","chrono-widow"],"endless":true}
+]

@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "Riftbreak Protocol",
+  "short_name": "Riftbreak",
+  "description": "A low-poly arena survival shooter built for touch and desktop play.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#08100e",
+  "theme_color": "#08100e",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {"id":"vanguard","name":"Vanguard","tag":"Survival","tags":["Survival"],"effect":"regen","description":"Regenerate health every second.","values":[0.5,0.75,1],"unit":" HP/s"},
+  {"id":"skirmisher","name":"Skirmisher","tag":"Mobility","tags":["Mobility"],"effect":"dashRecharge","description":"Shorten dash recharge time.","values":[10,15,22],"unit":"%"},
+  {"id":"gunslinger","name":"Gunslinger","tag":"DMG Boost","tags":["DMG Boost"],"effect":"physicalDamage","description":"Increase physical damage.","values":[5,7,10],"unit":"%"},
+  {"id":"channeler","name":"Channeler","tag":"Elemental","tags":["Elemental"],"effect":"elementalDamage","description":"Increase elemental damage.","values":[5,7,10],"unit":"%"},
+  {"id":"hexer","name":"Hexer","tag":"Debuff","tags":["Debuff"],"effect":"markDamage","description":"Increase Mark detonation damage.","values":[15,25,40],"unit":"%"},
+  {"id":"salvage-code","name":"Salvage Code","tag":"Survival","tags":["Survival"],"effect":"coinGain","description":"Increase run-coin drops.","values":[10,18,28],"unit":"%"},
+  {"id":"impact-lattice","name":"Impact Lattice","tag":"Survival","tags":["Survival"],"effect":"damageReduction","description":"Reduce incoming damage.","values":[5,7,10],"unit":"%"},
+  {"id":"tempo-core","name":"Tempo Core","tag":"DMG Boost","tags":["DMG Boost"],"effect":"fireRate","description":"Increase weapon fire rate.","values":[5,7,10],"unit":"%"},
+  {"id":"fleetstep","name":"Fleetstep","tag":"Mobility","tags":["Mobility"],"effect":"moveSpeed","description":"Increase movement speed.","values":[5,7,10],"unit":"%"},
+  {"id":"vital-frame","name":"Vital Frame","tag":"Survival","tags":["Survival"],"effect":"maxHp","description":"Increase maximum health.","values":[5,7,10],"unit":"%"},
+  {"id":"deadeye-link","name":"Deadeye Link","tag":"DMG Boost","tags":["DMG Boost"],"effect":"critRate","description":"Increase critical-hit chance.","values":[3,5,7],"unit":"%"},
+  {"id":"shatterpoint","name":"Shatterpoint","tag":"DMG Boost","tags":["DMG Boost"],"effect":"critDamage","description":"Increase critical-hit damage.","values":[10,15,22],"unit":"%"},
+  {"id":"med-gel","name":"Med-Gel Loop","tag":"Survival","tags":["Survival"],"effect":"regen","description":"Restore a small amount of health every second.","values":[0.25,0.4,0.6],"unit":" HP/s"},
+  {"id":"kindling-rounds","name":"Kindling Rounds","tag":"Elemental","tags":["Elemental","Debuff"],"effect":"igniteDamage","description":"Increase Ignite damage.","values":[10,15,22],"unit":"%"},
+  {"id":"cryo-jacket","name":"Cryo Jacket","tag":"Debuff","tags":["Debuff"],"effect":"chillStrength","description":"Increase the slowing strength of Chill.","values":[8,12,18],"unit":"%"},
+  {"id":"siegebreaker","name":"Siegebreaker","tag":"DMG Boost","tags":["DMG Boost"],"effect":"bossDamage","description":"Increase damage dealt to bosses.","values":[5,7,10],"unit":"%"},
+  {"id":"adaptive-payload","name":"Adaptive Payload","tag":"DMG Boost","tags":["DMG Boost"],"effect":"totalDamage","description":"Increase all damage dealt.","values":[4,6,9],"unit":"%"},
+  {"id":"flux-recovery","name":"Flux Recovery","tag":"Mobility","tags":["Mobility"],"effect":"skillCooldown","description":"Shorten active-skill cooldown.","values":[5,7,10],"unit":"%"},
+  {"id":"hazard-drive","name":"Hazard Drive","tag":"Penalty","tags":["DMG Boost","Penalty"],"effect":"riskDamage","description":"Increase all damage, but also increase damage taken.","values":[10,15,22],"penaltyValues":[5,7,10],"unit":"%"},
+  {"id":"ground-current","name":"Ground Current","tag":"Elemental","tags":["Elemental"],"effect":"auraDamage","description":"Emit a close-range damage field each second.","values":[3,5,7],"unit":" damage"},
+  {"id":"second-signal","name":"Second Signal","tag":"Survival","tags":["Survival"],"effect":"revive","description":"Revive once per run with part of maximum health.","values":[25,40,55],"unit":"% HP"}
+]

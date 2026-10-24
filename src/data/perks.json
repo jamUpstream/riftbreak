@@ -1,0 +1,8 @@
+[
+ {"id":"pierce","name":"Pierce","tag":"DMG Boost","effects":["Pass through 1 enemy","Pass through 2 enemies","Pass through 4; +10% per pierce"]},
+ {"id":"ricochet","name":"Ricochet","tag":"DMG Boost","effects":["Bounce once","Bounce twice","3 bounces, no damage loss"]},
+ {"id":"scatter","name":"Scatter","tag":"DMG Boost","effects":["3-bolt cone","5-bolt cone","7 bolts, tighter cone"]},
+ {"id":"salvo","name":"Salvo","tag":"DMG Boost","effects":["2 shots per volley","3 shots per volley","4 shots, shorter delay"]},
+ {"id":"splatter","name":"Splatter","tag":"Elemental","effects":["Hits leave a damage pool","Larger pool","Pool applies weapon status"]},
+ {"id":"burst","name":"Burst","tag":"DMG Boost","effects":["Every 4th shot bursts","Every 3rd shot bursts","Every 2nd; +20% damage"]}
+]

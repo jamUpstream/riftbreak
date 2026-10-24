@@ -1,0 +1,6 @@
+import {DEFAULT_CONTROL_LAYOUT,DEFAULT_SAVE,type ControlId,type ControlOrientation,type SaveData} from './types';
+const KEY='riftbreak-protocol-save-v1';
+export function loadSave():SaveData{try{const stored=JSON.parse(localStorage.getItem(KEY)||'{}'),layout=stored.controlLayout||{};return {...structuredClone(DEFAULT_SAVE),...stored,controlLayout:{portrait:mergeLayout('portrait',layout.portrait),landscape:mergeLayout('landscape',layout.landscape)}}}catch{return structuredClone(DEFAULT_SAVE)}}
+function mergeLayout(orientation:ControlOrientation,value:any){const defaults=structuredClone(DEFAULT_CONTROL_LAYOUT[orientation]);for(const id of Object.keys(defaults) as ControlId[])defaults[id]={...defaults[id],...(value?.[id]||{})};return defaults}
+export function writeSave(save:SaveData){localStorage.setItem(KEY,JSON.stringify(save))}
+export function resetSave(){localStorage.removeItem(KEY)}

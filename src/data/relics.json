@@ -1,0 +1,18 @@
+[
+  {"id":"ember-sigil","name":"Ember Sigil","tag":"Elemental","tags":["Elemental"],"effect":"igniteDamage","description":"Increase Ignite damage.","values":[10,15,22],"unit":"%"},
+  {"id":"frost-sigil","name":"Frost Sigil","tag":"Debuff","tags":["Debuff"],"effect":"chillStrength","description":"Increase the slowing strength of Chill.","values":[8,12,18],"unit":"%"},
+  {"id":"ward-sigil","name":"Ward Sigil","tag":"Survival","tags":["Survival"],"effect":"maxHp","description":"Increase maximum health.","values":[5,7,10],"unit":"%"},
+  {"id":"gale-sigil","name":"Gale Sigil","tag":"Mobility","tags":["Mobility"],"effect":"moveSpeed","description":"Increase movement speed.","values":[5,7,10],"unit":"%"},
+  {"id":"fang-sigil","name":"Fang Sigil","tag":"DMG Boost","tags":["DMG Boost"],"effect":"critRate","description":"Increase critical-hit chance.","values":[3,5,7],"unit":"%"},
+  {"id":"stillfire-seal","name":"Stillfire Seal","tag":"DMG Boost","tags":["DMG Boost"],"effect":"stationaryDamage","description":"Gain damage while standing still.","values":[8,12,18],"unit":"%"},
+  {"id":"lastlight-seal","name":"Lastlight Seal","tag":"DMG Boost","tags":["DMG Boost"],"effect":"missingHpDamage","description":"Deal more damage while health is low.","values":[5,7,10],"unit":"%"},
+  {"id":"afterimage-seal","name":"Afterimage Seal","tag":"Mobility","tags":["Mobility"],"effect":"dashRecharge","description":"Shorten dash recharge time.","values":[6,9,13],"unit":"%"},
+  {"id":"farpoint-seal","name":"Farpoint Seal","tag":"DMG Boost","tags":["DMG Boost"],"effect":"critDamage","description":"Increase critical-hit damage.","values":[8,12,18],"unit":"%"},
+  {"id":"flux-seal","name":"Flux Seal","tag":"Elemental","tags":["Elemental"],"effect":"skillDamage","description":"Increase active-skill damage.","values":[5,7,10],"unit":"%"},
+  {"id":"prism-seal","name":"Prism Seal","tag":"Debuff","tags":["Debuff"],"effect":"statusDamage","description":"Increase damage from status effects.","values":[6,9,13],"unit":"%"},
+  {"id":"quiet-seal","name":"Quiet Seal","tag":"DMG Boost","tags":["DMG Boost"],"effect":"physicalDamage","description":"Increase physical damage.","values":[5,7,10],"unit":"%"},
+  {"id":"orbit-seal","name":"Orbit Seal","tag":"Elemental","tags":["Elemental"],"effect":"auraDamage","description":"Emit a close-range elemental pulse each second.","values":[2,4,6],"unit":" damage"},
+  {"id":"brandglass-seal","name":"Brandglass Seal","tag":"Debuff","tags":["Debuff"],"effect":"markDamage","description":"Increase Mark detonation damage.","values":[10,15,22],"unit":"%"},
+  {"id":"kinetic-seal","name":"Kinetic Seal","tag":"Mobility","tags":["Mobility"],"effect":"bulletSpeed","description":"Increase projectile speed and range.","values":[5,7,10],"unit":"%"},
+  {"id":"harvest-seal","name":"Harvest Seal","tag":"Survival","tags":["Survival"],"effect":"xpGain","description":"Increase experience gained from pickups.","values":[5,7,10],"unit":"%"}
+]
