@@ -25,6 +25,7 @@ function talentDescription(characterId:string,tier:number,choice:number){const v
 const app=document.querySelector<HTMLDivElement>('#app')!;
 for(const eventName of['contextmenu','selectstart','dragstart','copy'])app.addEventListener(eventName,event=>event.preventDefault());
 registerPwa();let save=loadSave(),game:SurvivalGame|undefined,selectedStage=0,selectedCard:any=null,excluded=new Set<string>(),refreshes=0,charView=save.selectedCharacter,loadoutSignature='';
+if(import.meta.env.DEV){const localModPath='/src/dev/mod-menu.ts';(window as any).__RIFTBREAK_LOCAL_DEV__={getGame:()=>game};void import(/* @vite-ignore */localModPath).catch(()=>console.info('[Riftbreak] Local mod menu not installed.'))}
 const icon=(n:string)=>`<span class="glyph">${n}</span>`;
 const starCount=(xp:number)=>xp>=10000?5:xp>=4000?4:xp>=1500?3:xp>=500?2:1;
 const stars=(n:number,max=5)=>`<span class="stars">${Array.from({length:max},(_,i)=>i<n?'◆':'◇').join('')}</span>`;
@@ -34,7 +35,7 @@ function showMenu(){game?.destroy();game=undefined;shell(`<main class="menu-scre
  <header class="brand"><div class="brand-mark"><i></i><i></i><i></i></div><div><p>FIELD TERMINAL // 07</p><h1>RIFTBREAK<br><em>PROTOCOL</em></h1></div></header>
  <section class="menu-actions"><button class="hero-button" data-play><span>DEPLOY</span><small>CONTINUE: ${stages[Math.min(save.bestStage,5)].name}</small></button><button data-stages>${icon('⌁')}<span>STAGES<small>${Math.min(save.bestStage+1,6)} / 6 AVAILABLE</small></span></button><button data-chars>${icon('◈')}<span>SURVIVORS<small>${characters.length} OPERATIVES</small></span></button><button data-settings>${icon('⚙')}<span>SETTINGS<small>SYSTEM & CONTROLS</small></span></button></section>
  <aside class="menu-dossier"><div class="eyebrow">ACTIVE OPERATIVE</div><div class="portrait-shape" style="--c:${characters.find(c=>c.id===save.selectedCharacter)?.color}"><b>${characters.find(c=>c.id===save.selectedCharacter)?.name.split(' ')[0]}</b></div><p>${characters.find(c=>c.id===save.selectedCharacter)?.role}</p>${stars(starCount(save.characterExp[save.selectedCharacter]||0))}</aside>
- <footer><span>BUILD 1.0.4 // LOCAL RECORD</span><b>RUN COINS RESET ON DEPLOYMENT</b></footer></main>`,'menu');
+ <footer><span>BUILD 1.0.5 // LOCAL RECORD</span><b>RUN COINS RESET ON DEPLOYMENT</b></footer></main>`,'menu');
  document.querySelector('[data-play]')?.addEventListener('click',()=>startGame(Math.min(save.bestStage,5)));document.querySelector('[data-stages]')?.addEventListener('click',showStages);document.querySelector('[data-chars]')?.addEventListener('click',showCharacters);document.querySelector('[data-settings]')?.addEventListener('click',showSettings)}
 
 function titlebar(kicker:string,title:string){return `<header class="titlebar"><button data-back aria-label="Back">‹</button><div><small>${kicker}</small><h2>${title}</h2></div><b>LOCAL RECORD</b></header>`}

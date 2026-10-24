@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 
 type StageTheme={ground:string;sky:string;primary:string;accent:string;endless?:boolean};
-type Obstacle={x:number;z:number;r:number;kind:number;h:number;rot:number;biome:number};
+type Obstacle={x:number;z:number;r:number;kind:number;h:number;rot:number;biome:number;destroyedUntil?:number};
+export type BrokenObstacle={x:number;z:number;r:number;kind:number;biome:number};
 const CHUNK=16,VIEW=3,CLEAR=7,CAP=500;
 const PALETTES=[
  ['#76513a','#b05f31','#352c27'],['#335b43','#75a94b','#243a2e'],['#557b8d','#91dbea','#233943'],['#642f29','#d75631','#34201d'],['#463767','#a16bda','#201a32']
@@ -30,8 +31,8 @@ export class ProceduralMap{
  private chunk(x:number,z:number){const key=`${x},${z}`;const known=this.chunks.get(key);if(known)return known;const r=rng((x*73856093)^(z*19349663)^((this.stageIndex+1)*7919)),out:Obstacle[]=[];const biome=this.stage.endless?Math.abs(x*17+z*31)%5:Math.min(this.stageIndex,4),count=2+Math.floor(r()*3);
   for(let i=0;i<count;i++)for(let tries=0;tries<8;tries++){const ox=(x+r())*CHUNK,oz=(z+r())*CHUNK,roll=r(),structureRoll=r();let kind=0;if(biome===0)kind=roll<.32?2:roll<.54?6:roll<.72?1:0;if(biome===1)kind=roll<.34?5:roll<.62?1:roll<.82?6:0;if(biome===2)kind=roll<.62?3:roll<.82?0:5;if(biome===3)kind=roll<.34?1:roll<.65?2:roll<.84?6:0;if(biome===4)kind=roll<.4?3:roll<.7?4:roll<.86?2:0;if(structureRoll<.34)kind=7+((biome+Math.floor(r()*3))%5);const rad=kind>=7?1.15+r()*.8:.65+r()*.72;if(Math.hypot(ox,oz)<CLEAR+rad)continue;let okay=true;for(const o of out)if(Math.hypot(ox-o.x,oz-o.z)<rad+o.r+1.5){okay=false;break}if(!okay)continue;out.push({x:ox,z:oz,r:rad,kind,h:r(),rot:r()*Math.PI*2,biome});break}
   this.chunks.set(key,out);return out}
- update(px:number,pz:number){const cx=Math.floor(px/CHUNK),cz=Math.floor(pz/CHUNK);this.floor.position.set(Math.round(px/8)*8,-.04,Math.round(pz/8)*8);this.grid.position.set(Math.round(px/8)*8,-.015,Math.round(pz/8)*8);if(cx===this.cx&&cz===this.cz)return;this.cx=cx;this.cz=cz;if(this.chunks.size>700)this.chunks.clear();this.active=[];for(let x=-VIEW;x<=VIEW;x++)for(let z=-VIEW;z<=VIEW;z++)this.active.push(...this.chunk(cx+x,cz+z));this.draw()}
- private draw(){const counts=new Array(this.meshes.length).fill(0),color=new THREE.Color();for(const o of this.active){const idx=counts[o.kind]++;if(idx>=CAP)continue;const p=PALETTES[o.biome],m=this.meshes[o.kind],d=this.dummy;d.rotation.set(0,o.rot,0);let sx=o.r,sy=o.r,sz=o.r,y=o.r*.6;
+ update(px:number,pz:number){const cx=Math.floor(px/CHUNK),cz=Math.floor(pz/CHUNK),now=performance.now();this.floor.position.set(Math.round(px/8)*8,-.04,Math.round(pz/8)*8);this.grid.position.set(Math.round(px/8)*8,-.015,Math.round(pz/8)*8);let respawned=false;for(const o of this.active)if(o.destroyedUntil&&o.destroyedUntil<=now){if(Math.hypot(px-o.x,pz-o.z)<o.r+2)o.destroyedUntil=now+3000;else{o.destroyedUntil=undefined;respawned=true}}if(cx===this.cx&&cz===this.cz){if(respawned)this.draw();return}this.cx=cx;this.cz=cz;if(this.chunks.size>700)this.chunks.clear();this.active=[];for(let x=-VIEW;x<=VIEW;x++)for(let z=-VIEW;z<=VIEW;z++)this.active.push(...this.chunk(cx+x,cz+z));this.draw()}
+ private draw(){const counts=new Array(this.meshes.length).fill(0),color=new THREE.Color(),now=performance.now();for(const o of this.active){if(o.destroyedUntil&&o.destroyedUntil>now)continue;const idx=counts[o.kind]++;if(idx>=CAP)continue;const p=PALETTES[o.biome],m=this.meshes[o.kind],d=this.dummy;d.rotation.set(0,o.rot,0);let sx=o.r,sy=o.r,sz=o.r,y=o.r*.6;
    if(o.kind===0){sx=o.r*1.15;sy=o.r*(.7+o.h*.55);sz=o.r;y=sy*.7}
    if(o.kind===1){sx=o.r*.65;sy=2.2+o.h*2.1;sz=o.r*.65;y=sy/2}
    if(o.kind===2){sx=o.r*(1.3+o.h);sy=.7+o.h*1.1;sz=o.r*(.75+o.h*.3);y=sy/2;d.rotation.z=(o.h-.5)*.16}
@@ -42,6 +43,7 @@ export class ProceduralMap{
    if(o.kind>=7){const scale=.72+o.r*.34;sx=scale;sy=scale*(.9+o.h*.18);sz=scale;y=0;d.rotation.y=o.rot}
    d.position.set(o.x,y,o.z);d.scale.set(sx,sy,sz);d.updateMatrix();m.setMatrixAt(idx,d.matrix);color.set(p[o.kind%3]).multiplyScalar(.78+o.h*.28);m.setColorAt(idx,color)
   }for(let i=0;i<this.meshes.length;i++){const m=this.meshes[i];m.count=Math.min(CAP,counts[i]);m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true}}
- resolve(x:number,z:number,r:number){const cx=Math.floor(x/CHUNK),cz=Math.floor(z/CHUNK);for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++)for(const o of this.chunk(cx+a,cz+b)){const dx=x-o.x,dz=z-o.z,min=o.r+r,d2=dx*dx+dz*dz;if(d2<min*min){const d=Math.sqrt(d2)||.001,push=min-d;x+=(d2>1e-8?dx/d:1)*push;z+=(d2>1e-8?dz/d:0)*push}}return{x,z}}
+ smash(x:number,z:number,radius:number,respawnMs=18000){const now=performance.now(),broken:BrokenObstacle[]=[];for(const o of this.active){if(o.destroyedUntil&&o.destroyedUntil>now)continue;if(Math.hypot(x-o.x,z-o.z)>radius+o.r)continue;o.destroyedUntil=now+respawnMs;broken.push({x:o.x,z:o.z,r:o.r,kind:o.kind,biome:o.biome})}if(broken.length)this.draw();return broken}
+ resolve(x:number,z:number,r:number){const cx=Math.floor(x/CHUNK),cz=Math.floor(z/CHUNK),now=performance.now();for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++)for(const o of this.chunk(cx+a,cz+b)){if(o.destroyedUntil&&o.destroyedUntil>now)continue;const dx=x-o.x,dz=z-o.z,min=o.r+r,d2=dx*dx+dz*dz;if(d2<min*min){const d=Math.sqrt(d2)||.001,push=min-d;x+=(d2>1e-8?dx/d:1)*push;z+=(d2>1e-8?dz/d:0)*push}}return{x,z}}
  blocks(x:number,z:number,r:number){const p=this.resolve(x,z,r);return Math.abs(p.x-x)>.001||Math.abs(p.z-z)>.001}
 }
