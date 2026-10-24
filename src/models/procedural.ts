@@ -148,7 +148,25 @@ export function enemyGeometry(shape:string){
 /** Every named boss receives a unique primitive-built silhouette. */
 export function bossGeometry(id:string){
  const p:Primitive[]=[];
- const legs=(count:number,rx:number,rz:number,y:number,length:number,thick=.13)=>{for(let i=0;i<count;i++){const a=i/count*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),hipX=sx*rx*.58,hipZ=sz*rz*.58,kneeX=sx*(rx+length*.54),kneeZ=sz*(rz+length*.42),footX=sx*(rx+length),footZ=sz*(rz+length*.82);p.push(limb(hipX,y,hipZ,kneeX,y*.72,kneeZ,thick*1.18),limb(kneeX,y*.72,kneeZ,footX,.12,footZ,thick),oct(footX,.12,footZ,thick*2.5,thick*1.35,thick*3.2));}};
+ const legs=(count:number,rx:number,rz:number,y:number,length:number,thick=.13)=>{
+  // The abdomen overlaps both the torso above and every hip below. Without it,
+  // scaling the boss exposed small local-space gaps as visibly floating limbs.
+  p.push(ico(0,y+.34,0,rx*1.44,.76,rz*1.9),box(0,y+.52,-rz*.52,rx*.72,.48,rz*1.15));
+  for(let i=0;i<count;i++){
+   const a=i/count*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),hipX=sx*rx*.58,hipZ=sz*rz*.58,kneeX=sx*(rx+length*.54),kneeZ=sz*(rz+length*.42),footX=sx*(rx+length),footZ=sz*(rz+length*.82),kneeY=Math.max(.2,y*.72);
+   p.push(
+    oct(hipX,y,hipZ,thick*3.6,thick*3.2,thick*3.6),
+    limb(hipX,y,hipZ,kneeX,kneeY,kneeZ,thick*1.28),
+    oct(kneeX,kneeY,kneeZ,thick*3.1,thick*2.8,thick*3.1),
+    limb(kneeX,kneeY,kneeZ,footX,.12,footZ,thick*1.08),
+    oct(footX,.12,footZ,thick*2.7,thick*1.45,thick*3.4)
+   );
+  }
+ };
+ // A compact inner thorax fills only the center of each silhouette. It stays
+ // behind the named armor/creature pieces while guaranteeing that heads,
+ // shells, hovering crowns, and lower appendages meet one solid body.
+ p.push(ico(0,1,0,1.18,.92,1.42));
  const armoredBeast=()=>{p.push(ico(0,1.02,.15,1.65,.88,1.55),box(0,1.42,.25,1.38,.38,1.38),ico(0,1.03,-1.12,.82,.62,.72));legs(6,1.2,.72,.4,1.18,.16)};
  switch(id){
   case 'scrap-brute': armoredBeast();p.push(box(-.48,1.78,.05,.62,.34,.82,0,0,.18),box(.42,1.7,.12,.9,.3,.66,0,0,-.12),cone(-.42,1.05,-1.72,.22,.94,-Math.PI/2,0,-.22),cone(.42,1.05,-1.72,.22,.94,-Math.PI/2,0,.22));break;
