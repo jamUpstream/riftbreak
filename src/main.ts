@@ -43,7 +43,7 @@ function enhanceMainMenu(){syncAchievements();const nav=document.querySelector<H
 function showMenu(){game?.destroy();game=undefined;const operative=characters.find(c=>c.id===save.selectedCharacter)!,stage=stages[Math.min(save.bestStage,5)];shell(`<main class="menu-screen clean-menu">
  <header class="clean-brand"><div class="brand-mark"><i></i><i></i><i></i></div><div><small>RIFTBREAK</small><h1>PROTOCOL</h1></div></header>
  <section class="menu-primary"><button class="hero-button" data-play><span><b>DEPLOY</b><small>${stage.name} · ${operative.name}</small></span><strong>→</strong></button><nav class="menu-actions clean-nav" aria-label="Main menu"><button data-stages>${icon('⌁')}<span>STAGES</span></button><button data-chars>${icon('◈')}<span>SURVIVORS</span></button><button data-settings>${icon('⚙')}<span>SETTINGS</span></button></nav></section>
- <small class="menu-version">v1.2.2</small></main>`,'menu');
+ <small class="menu-version">v1.2.3</small></main>`,'menu');
  document.querySelector('[data-play]')?.addEventListener('click',async()=>{await requestLandscape({fullscreen:true});startGame(Math.min(save.bestStage,5))});document.querySelector('[data-stages]')?.addEventListener('click',showStages);document.querySelector('[data-chars]')?.addEventListener('click',showCharacters);document.querySelector('[data-settings]')?.addEventListener('click',showGameSettings)}
 
 function titlebar(kicker:string,title:string){return `<header class="titlebar"><button data-back aria-label="Back">‹</button><div><small>${kicker}</small><h2>${title}</h2></div></header>`}
