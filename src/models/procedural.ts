@@ -58,6 +58,7 @@ const merged=(parts:Primitive[])=>{
 };
 const box=(x:number,y:number,z:number,sx:number,sy:number,sz:number,rx=0,ry=0,rz=0)=>placed(new THREE.BoxGeometry(1,1,1),x,y,z,sx,sy,sz,rx,ry,rz);
 const ico=(x:number,y:number,z:number,sx:number,sy=sx,sz=sx)=>placed(new THREE.IcosahedronGeometry(.5,0),x,y,z,sx,sy,sz);
+const dode=(x:number,y:number,z:number,sx:number,sy=sx,sz=sx,rx=0,ry=0,rz=0)=>placed(new THREE.DodecahedronGeometry(.5,0),x,y,z,sx,sy,sz,rx,ry,rz);
 const oct=(x:number,y:number,z:number,sx:number,sy=sx,sz=sx,rx=0,ry=0,rz=0)=>placed(new THREE.OctahedronGeometry(.5,0),x,y,z,sx,sy,sz,rx,ry,rz);
 const cyl=(x:number,y:number,z:number,r:number,h:number,rx=0,ry=0,rz=0)=>placed(new THREE.CylinderGeometry(r,r*.82,h,5),x,y,z,1,1,1,rx,ry,rz);
 const cone=(x:number,y:number,z:number,r:number,h:number,rx=0,ry=0,rz=0)=>placed(new THREE.ConeGeometry(r,h,5),x,y,z,1,1,1,rx,ry,rz);
@@ -113,34 +114,34 @@ export function enemyGeometry(shape:string){
  const p:Primitive[]=[];
  if(shape==='husk'){
   // The classic rounded starter: one clear faceted orb and a small center core.
-  p.push(ico(0,.68,0,1.12,.88,1.12),oct(0,.72,-.54,.4,.34,.3));
+  p.push(ico(0,.68,0,1.12,.88,1.12),oct(0,.72,-.54,.4,.34,.3),cone(-.3,.98,-.34,.1,.42,0,0,-.35),cone(.3,.98,-.34,.1,.42,0,0,.35));
  }else if(shape==='darter'){
   // Fast arrowhead: narrow from the front and visibly directional.
   p.push(cone(0,.68,0,.5,1.45,Math.PI/2),cone(-.38,.68,.25,.22,.7,0,0,-Math.PI/2),cone(.38,.68,.25,.22,.7,0,0,Math.PI/2));
  }else if(shape==='caster'){
   // Floating spell orb surrounded by a low-poly halo.
-  p.push(ico(0,1.08,0,1.0,1.0,1.0),torus(0,1.08,0,.78,.09,Math.PI/2),oct(0,1.08,-.5,.38,.34,.28));
+  p.push(ico(0,1.08,0,1.0,1.0,1.0),torus(0,1.08,0,.78,.09,Math.PI/2),oct(0,1.08,-.5,.38,.34,.28));for(let i=0;i<3;i++){const a=i/3*Math.PI*2;p.push(oct(Math.sin(a)*.68,1.08,Math.cos(a)*.68,.18));}
  }else if(shape==='hulk'){
   // Oversized rounded polyhedron; mass alone communicates the tank role.
-  p.push(placed(new THREE.DodecahedronGeometry(.72,0),0,.82,0,1.65,1.42,1.65),box(0,.84,-.72,.72,.42,.3));
+  p.push(placed(new THREE.DodecahedronGeometry(.72,0),0,.82,0,1.65,1.42,1.65),box(0,.84,-.72,.72,.42,.3),box(-.62,.22,.48,.42,.44,.6),box(.62,.22,.48,.42,.44,.6));
  }else if(shape==='aegis'){
   // Circular shield puck with a gem at its protected front face.
-  p.push(placed(new THREE.CylinderGeometry(.72,.82,.36,8),0,.82,0,1,1,1,Math.PI/2),torus(0,.82,-.24,.55,.08,Math.PI/2),oct(0,.82,-.34,.34,.34,.2));
+  p.push(placed(new THREE.CylinderGeometry(.72,.82,.36,8),0,.82,0,1,1,1,Math.PI/2),torus(0,.82,-.24,.55,.08,Math.PI/2),oct(0,.82,-.34,.34,.34,.2),limb(-.34,.62,.1,-.72,.16,.42,.09),limb(.34,.62,.1,.72,.16,.42,.09));
  }else if(shape==='lure'){
   // A hovering diamond pickup-like decoy with two orbit bands.
   p.push(oct(0,1.0,0,1.18,1.35,1.18),torus(0,1.0,0,.72,.065,Math.PI/2),torus(0,1.0,0,.58,.05,.45,0,Math.PI/2));
  }else if(shape==='spitter'){
   // Flattened round reservoir with a short geometric nozzle.
-  p.push(ico(0,.68,.18,1.3,.82,1.16),cone(0,.68,-.76,.34,.72,-Math.PI/2),ico(-.34,1.02,.38,.32),ico(.32,1.08,.34,.26));
+  p.push(ico(0,.68,.18,1.3,.82,1.16),cone(0,.68,-.76,.34,.72,-Math.PI/2),ico(-.34,1.02,.38,.32),ico(.32,1.08,.34,.26));for(const s of[-1,1])p.push(limb(s*.42,.52,.18,s*.78,.12,.48,.08),limb(s*.36,.5,-.15,s*.72,.12,-.38,.08));
  }else if(shape==='walker'){
   // The roster's mechanical cube, capped by a circular artillery barrel.
-  p.push(box(0,.74,.06,1.28,1.12,1.16),box(0,1.32,.1,.68,.28,.68),cyl(0,1.34,-.68,.16,1.18,Math.PI/2));
+  p.push(box(0,.74,.06,1.28,1.12,1.16),box(0,1.32,.1,.68,.28,.68),cyl(0,1.34,-.68,.16,1.18,Math.PI/2));for(const s of[-1,1])p.push(limb(s*.42,.5,.38,s*.78,.12,.62,.11),limb(s*.42,.5,-.25,s*.78,.12,-.5,.11));
  }else if(shape==='splitter'){
   // Two touching geometric cells clearly preview its split-on-death behavior.
   p.push(oct(-.4,.72,0,.94,.94,1.08),oct(.4,.72,0,.94,.94,1.08),torus(0,.72,0,.42,.07,Math.PI/2));
  }else{
   // Hollow ring with a suspended diamond core for the teleporting unit.
-  p.push(torus(0,1.06,0,.72,.18,Math.PI/2),oct(0,1.06,-.02,.72,1.0,.34),torus(0,1.06,0,.43,.055,.35,0,Math.PI/2));
+  p.push(torus(0,1.06,0,.72,.18,Math.PI/2),oct(0,1.06,-.02,.72,1.0,.34),torus(0,1.06,0,.43,.055,.35,0,Math.PI/2),cone(-.36,.45,.18,.1,.86,0,0,-.28),cone(.36,.45,.18,.1,.86,0,0,.28));
  }
  return merged(p);
 }
@@ -151,7 +152,7 @@ export function bossGeometry(id:string){
  const legs=(count:number,rx:number,rz:number,y:number,length:number,thick=.13)=>{
   // The abdomen overlaps both the torso above and every hip below. Without it,
   // scaling the boss exposed small local-space gaps as visibly floating limbs.
-  p.push(ico(0,y+.34,0,rx*1.44,.76,rz*1.9),box(0,y+.52,-rz*.52,rx*.72,.48,rz*1.15));
+  p.push(ico(0,y+.34,0,rx*1.44,.76,rz*1.9),dode(0,y+.5,-rz*.48,rx*.82,.58,rz*1.28));
   for(let i=0;i<count;i++){
    const a=i/count*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),hipX=sx*rx*.58,hipZ=sz*rz*.58,kneeX=sx*(rx+length*.54),kneeZ=sz*(rz+length*.42),footX=sx*(rx+length),footZ=sz*(rz+length*.82),kneeY=Math.max(.2,y*.72);
    p.push(
@@ -163,28 +164,54 @@ export function bossGeometry(id:string){
    );
   }
  };
+ const roots=(count:number,radius:number,y:number,length:number,thick=.12)=>{
+  p.push(torus(0,y+.36,0,radius*.72,thick*.72,Math.PI/2));
+  for(let i=0;i<count;i++){
+   const a=i/count*Math.PI*2,spread=.78+(i%2)*.18,x=Math.sin(a)*radius*spread,z=Math.cos(a)*radius*spread;
+   p.push(limb(Math.sin(a)*radius*.34,y+.45,Math.cos(a)*radius*.34,x,.16,z,thick),cone(x,.14,z,thick*1.65,length,0,0,-Math.sin(a)*.26));
+  }
+ };
+ const hoverFins=(count:number,radius:number,y:number,length:number)=>{
+  p.push(torus(0,y,0,radius*.7,.075,Math.PI/2));
+  for(let i=0;i<count;i++){
+   const a=i/count*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),rootX=sx*radius*.42,rootZ=sz*radius*.42,tipX=sx*radius,tipZ=sz*radius;
+   p.push(limb(rootX,y,rootZ,tipX,y+(i%2?.14:-.08),tipZ,.085),cone(tipX,y+(i%2?.14:-.08),tipZ,.2,length,0,0,-a));
+  }
+ };
+ const heavySupports=(spread:number,y:number,length:number,thick=.2)=>{
+  for(const side of[-1,1]){
+   const hipX=side*spread*.45,kneeX=side*spread*.68;
+   p.push(oct(hipX,y,.18,thick*3.6),limb(hipX,y,.18,kneeX,y*.48,.18+length*.16,thick*1.35),oct(kneeX,y*.48,.18+length*.16,thick*3.1),limb(kneeX,y*.48,.18+length*.16,side*spread,.12,.18+length*.38,thick*1.15),dode(side*spread,.12,.18+length*.38,thick*3.5,thick*1.7,thick*4.8));
+  }
+ };
  // A compact inner thorax fills only the center of each silhouette. It stays
  // behind the named armor/creature pieces while guaranteeing that heads,
  // shells, hovering crowns, and lower appendages meet one solid body.
- p.push(ico(0,1,0,1.18,.92,1.42));
- const armoredBeast=()=>{p.push(ico(0,1.02,.15,1.65,.88,1.55),box(0,1.42,.25,1.38,.38,1.38),ico(0,1.03,-1.12,.82,.62,.72));legs(6,1.2,.72,.4,1.18,.16)};
+ p.push(
+  ico(0,.72,.1,1.62,.54,1.8),
+  ico(0,1,0,1.18,.92,1.42),
+  // Shared tapered neck: every named head overlaps this shell and the thorax,
+  // so large instance scaling cannot expose a gap between them.
+  dode(0,1.04,-.58,1.06,.72,1.26)
+ );
+ const armoredBeast=()=>{p.push(ico(0,1.02,.15,1.65,.88,1.55),dode(0,1.38,.18,1.48,.52,1.46),ico(0,1.03,-1.12,.82,.62,.72));legs(4,1.2,.72,.4,1.18,.19)};
  switch(id){
-  case 'scrap-brute': armoredBeast();p.push(box(-.48,1.78,.05,.62,.34,.82,0,0,.18),box(.42,1.7,.12,.9,.3,.66,0,0,-.12),cone(-.42,1.05,-1.72,.22,.94,-Math.PI/2,0,-.22),cone(.42,1.05,-1.72,.22,.94,-Math.PI/2,0,.22));break;
+  case 'scrap-brute': armoredBeast();p.push(dode(-.42,1.68,.05,.74,.46,.9,0,0,.18),oct(.38,1.62,.1,1.0,.46,.76,0,0,-.12),cone(-.42,1.05,-1.72,.22,.94,-Math.PI/2,0,-.22),cone(.42,1.05,-1.72,.22,.94,-Math.PI/2,0,.22));break;
   case 'wire-stalker': p.push(ico(0,.92,0,1.2,.6,1.55),ico(0,1.35,-1.12,.62,.55,.8),cone(0,1.36,-1.82,.34,.88,-Math.PI/2),torus(0,1.02,.1,.88,.08,Math.PI/2));legs(8,1.15,.86,.38,1.45,.11);break;
-  case 'crane-colossus': p.push(ico(0,1.0,.2,1.55,.7,1.45),ico(0,1.12,-1.08,.72,.58,.78),box(0,1.72,.7,.48,.48,1.15),box(0,2.18,1.4,.38,.38,1.25,Math.PI*.18),cyl(0,2.35,2.15,.1,1.15,.35),oct(0,1.78,2.45,.42,.62,.42));legs(6,1.18,.72,.38,1.2,.15);p.push(cone(-.45,1.05,-1.7,.18,.85,-Math.PI/2,0,-.22),cone(.45,1.05,-1.7,.18,.85,-Math.PI/2,0,.22));break;
-  case 'bog-hurler': p.push(ico(0,.95,.2,1.62,1.0,1.36),ico(0,1.25,-1.05,.8,.62,.82),ico(-.65,1.65,.55,.72),ico(.62,1.78,.5,.62),cone(0,1.15,-1.72,.42,.82,-Math.PI/2));legs(6,1.15,.72,.34,1.15,.16);break;
-  case 'spore-matron': p.push(ico(0,.82,.05,1.05,.58,1.0),cyl(0,1.5,0,.45,.9),placed(new THREE.CylinderGeometry(1.42,.68,.58,9),0,2.02,0),ico(-1.02,1.25,.32,.42),ico(1.0,1.38,.2,.48),ico(0,1.05,.9,.38));legs(8,1.0,.62,.32,.92,.11);break;
+  case 'crane-colossus': p.push(ico(0,1.0,.2,1.55,.7,1.45),ico(0,1.12,-1.08,.72,.58,.78),limb(0,1.16,.5,0,1.82,1.12,.25),oct(0,1.82,1.12,.58),limb(0,1.82,1.12,0,2.22,2.02,.2),oct(0,2.22,2.02,.44),limb(0,2.22,2.02,0,1.7,2.5,.12),oct(0,1.68,2.52,.46,.62,.46));heavySupports(1.25,.48,1.2,.2);p.push(cone(-.45,1.05,-1.7,.18,.85,-Math.PI/2,0,-.22),cone(.45,1.05,-1.7,.18,.85,-Math.PI/2,0,.22));break;
+  case 'bog-hurler': p.push(ico(0,.95,.2,1.62,1.0,1.36),ico(0,1.25,-1.05,.8,.62,.82),ico(-.65,1.65,.55,.72),ico(.62,1.78,.5,.62),cone(0,1.15,-1.72,.42,.82,-Math.PI/2));legs(4,1.15,.72,.34,1.15,.19);break;
+  case 'spore-matron': p.push(ico(0,.82,.05,1.05,.58,1.0),cyl(0,1.5,0,.45,.9),placed(new THREE.CylinderGeometry(1.42,.68,.58,9),0,2.02,0),ico(-1.02,1.25,.32,.42),ico(1.0,1.38,.2,.48),ico(0,1.05,.9,.38));roots(5,.92,.42,.62,.12);break;
   case 'mire-leviathan': p.push(ico(0,.7,.85,1.15,.78,1.2),ico(0,.88,0,1.0,.82,1.2),ico(0,1.14,-.85,.86,.78,1.05),ico(0,1.5,-1.6,.72,.72,.9),cone(0,1.48,-2.35,.48,1.1,-Math.PI/2),cone(-.72,1.32,-1.15,.28,1.05,0,0,-Math.PI/2),cone(.72,1.32,-1.15,.28,1.05,0,0,Math.PI/2));break;
-  case 'frost-warden': p.push(ico(0,.88,.18,1.35,.62,1.18),box(0,1.05,-.72,1.82,1.42,.24,.1),oct(0,1.22,-1.24,.62,.52,.55),cone(-.62,1.78,-.5,.18,.9,0,0,-.35),cone(0,1.98,-.38,.2,1.1),cone(.62,1.78,-.5,.18,.9,0,0,.35));legs(6,1.05,.62,.32,1.02,.13);break;
+  case 'frost-warden': p.push(ico(0,.88,.18,1.35,.62,1.18),dode(0,1.05,-.7,1.95,1.48,.34,.1),oct(0,1.22,-1.2,.68,.58,.62),cone(-.62,1.7,-.46,.18,.9,0,0,-.35),cone(0,1.84,-.38,.2,1.1),cone(.62,1.7,-.46,.18,.9,0,0,.35));hoverFins(5,.92,.62,.58);break;
   case 'shard-weaver': p.push(oct(0,1.12,0,1.35,.8,1.35),oct(0,1.52,-.98,.7,.62,.82));legs(8,1.26,.9,.42,1.62,.12);for(let i=0;i<5;i++){const a=(i/4-.5)*1.7;p.push(cone(Math.sin(a)*.72,1.92,.15+Math.cos(a)*.42,.14,.82,0,0,-Math.sin(a)*.45));}break;
-  case 'avalanche-titan': p.push(ico(0,1.18,.15,1.92,1.35,1.72),ico(0,1.36,-1.38,1.02,.82,.9),cone(-.62,1.72,-1.82,.3,1.0,-Math.PI/2,0,-.28),cone(.62,1.72,-1.82,.3,1.0,-Math.PI/2,0,.28));legs(6,1.38,.82,.42,1.45,.2);p.push(cone(-.75,2.25,.12,.26,.92,0,0,-.4),cone(0,2.52,.1,.3,1.18),cone(.75,2.25,.12,.26,.92,0,0,.4));break;
+  case 'avalanche-titan': p.push(ico(0,1.18,.15,1.92,1.35,1.72),ico(0,1.36,-1.38,1.02,.82,.9),cone(-.62,1.72,-1.82,.3,1.0,-Math.PI/2,0,-.28),cone(.62,1.72,-1.82,.3,1.0,-Math.PI/2,0,.28));heavySupports(1.48,.56,1.4,.25);p.push(cone(-.75,2.25,.12,.26,.92,0,0,-.4),cone(0,2.52,.1,.3,1.18),cone(.75,2.25,.12,.26,.92,0,0,.4));break;
   case 'slag-golem': armoredBeast();p.push(ico(-.58,1.52,-.5,.55),ico(.56,1.38,-.52,.46),cone(0,1.96,.22,.5,.92),cone(-.52,1.0,-1.62,.22,.82,-Math.PI/2,0,-.25),cone(.52,1.0,-1.62,.22,.82,-Math.PI/2,0,.25));break;
   case 'furnace-priest': p.push(ico(0,1.52,0,.86,1.0,.72),torus(0,1.62,0,1.18,.12,Math.PI/2),cone(-1.0,1.48,.18,.52,1.55,0,0,-Math.PI/2),cone(1.0,1.48,.18,.52,1.55,0,0,Math.PI/2),oct(0,1.62,-.55,.48,.42,.35));for(let i=0;i<6;i++){const a=i/6*Math.PI*2;p.push(cone(Math.sin(a)*.55,.55,Math.cos(a)*.46,.1,1.22,0,0,-Math.sin(a)*.5));}break;
-  case 'forge-tyrant': p.push(ico(0,.92,.78,1.42,.72,1.05),ico(0,1.02,-.18,1.3,.76,1.08),ico(0,1.22,-1.12,1.08,.68,.92),box(0,1.62,-.15,1.5,.32,.92),cone(-.5,1.18,-1.82,.24,1.0,-Math.PI/2,0,-.28),cone(.5,1.18,-1.82,.24,1.0,-Math.PI/2,0,.28));legs(8,1.18,.9,.36,1.25,.15);break;
-  case 'echo-knight': p.push(ico(0,1.04,.18,1.0,.62,1.25),ico(0,1.38,-.92,.62,.58,.72),cone(-.76,1.02,-1.05,.22,1.65,-.35,0,-.68),cone(.76,1.02,-1.05,.22,1.65,-.35,0,.68));legs(6,.82,.65,.32,.95,.11);p.push(cone(-.3,1.92,-.66,.12,.72,0,0,-.28),cone(.3,1.92,-.66,.12,.72,0,0,.28));break;
+  case 'forge-tyrant': p.push(ico(0,.92,.78,1.42,.72,1.05),ico(0,1.02,-.18,1.3,.76,1.08),ico(0,1.22,-1.12,1.08,.68,.92),dode(0,1.55,-.18,1.56,.5,1.02),cone(-.5,1.18,-1.82,.24,1.0,-Math.PI/2,0,-.28),cone(.5,1.18,-1.82,.24,1.0,-Math.PI/2,0,.28));heavySupports(1.3,.46,1.2,.22);break;
+  case 'echo-knight': p.push(ico(0,1.04,.18,1.0,.62,1.25),ico(0,1.38,-.92,.62,.58,.72),cone(-.76,1.02,-1.05,.22,1.65,-.35,0,-.68),cone(.76,1.02,-1.05,.22,1.65,-.35,0,.68));heavySupports(.88,.38,.9,.16);p.push(cone(-.3,1.92,-.66,.12,.72,0,0,-.28),cone(.3,1.92,-.66,.12,.72,0,0,.28));break;
   case 'gravity-seer': p.push(ico(0,1.65,0,1.18),ico(0,1.65,0,.54),torus(0,1.65,0,1.5,.12,Math.PI/2,.35),torus(0,1.65,0,1.15,.1,.3,0,Math.PI/2));for(let i=0;i<6;i++){const a=i/6*Math.PI*2;p.push(cone(Math.sin(a)*.68,.55,Math.cos(a)*.62,.1,1.3,0,0,-Math.sin(a)*.48));}break;
-  case 'hollow-crown': p.push(ico(0,1.48,0,1.08,.78,1.02),torus(0,1.72,0,1.18,.15,Math.PI/2));for(let i=0;i<7;i++){const a=i/7*Math.PI*2;p.push(cone(Math.sin(a)*.96,2.42,Math.cos(a)*.96,.22,1.35,0,0,-a));p.push(cone(Math.sin(a)*.62,.52,Math.cos(a)*.55,.1,1.18,0,0,-Math.sin(a)*.5));}p.push(oct(0,1.48,-.58,.48));break;
-  case 'chrono-widow': p.push(placed(new THREE.DodecahedronGeometry(.72,0),0,1.18,.48,1.9,1.28,2.2),ico(0,1.48,-1.32,.92,.72,1.02),oct(0,1.5,-1.96,.72,.5,.82),torus(0,1.28,.35,1.52,.16,Math.PI/2),torus(0,1.28,.35,1.12,.1,.35,0,Math.PI/2),torus(0,1.28,.35,.76,.08,-.35,0,Math.PI/2),cone(-.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,-.18),cone(.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,.18));legs(8,1.58,1.15,.62,2.05,.18);for(let i=0;i<8;i++){const a=i/8*Math.PI*2;p.push(cone(Math.sin(a)*1.48,2.05,Math.cos(a)*1.1+.35,.16,.92,0,0,-a));}break;
+  case 'hollow-crown': p.push(ico(0,1.25,.18,1.62,.82,1.48),ico(0,1.55,-.92,.82,.62,.78),torus(0,1.42,.08,1.06,.16,Math.PI/2));roots(5,1.08,.48,1.08,.14);for(let i=0;i<7;i++){const a=(i/6-.5)*2.2;p.push(cone(Math.sin(a)*.78,2.08,-.02+Math.cos(a)*.42,.18,.94,0,0,-Math.sin(a)*.4));}p.push(oct(0,1.55,-1.38,.5,.42,.34),cone(-.38,1.48,-1.88,.18,.8,-Math.PI/2,0,-.18),cone(.38,1.48,-1.88,.18,.8,-Math.PI/2,0,.18));break;
+  case 'chrono-widow': p.push(placed(new THREE.DodecahedronGeometry(.72,0),0,1.18,.48,1.9,1.28,2.2),ico(0,1.48,-1.32,.92,.72,1.02),oct(0,1.5,-1.96,.72,.5,.82),torus(0,1.28,.35,1.52,.16,Math.PI/2),torus(0,1.28,.35,1.12,.1,.35,0,Math.PI/2),torus(0,1.28,.35,.76,.08,-.35,0,Math.PI/2),cone(-.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,-.18),cone(.38,1.44,-2.58,.22,1.25,-Math.PI/2,0,.18));legs(8,1.58,1.15,.62,2.05,.18);for(let i=0;i<8;i++){const a=i/8*Math.PI*2,sx=Math.sin(a),sz=Math.cos(a),rootX=sx*.76,rootZ=sz*.72+.35,tipX=sx*1.14,tipZ=sz*.98+.35;p.push(limb(rootX,1.62,rootZ,tipX,1.96,tipZ,.09),cone(tipX,2.02,tipZ,.16,.92,0,0,-a));}break;
   default: armoredBeast();
  }
  return merged(p);

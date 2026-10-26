@@ -1,0 +1,10 @@
+[
+  {"id":"first-sortie","name":"First Sortie","description":"Complete your first deployment.","stat":"runs","target":1,"reward":40},
+  {"id":"breach-sealed","name":"Breach Sealed","description":"Complete any operation successfully.","stat":"victories","target":1,"reward":80},
+  {"id":"crowd-breaker","name":"Crowd Breaker","description":"Eliminate 250 hostiles across all runs.","stat":"kills","target":250,"reward":100},
+  {"id":"threat-hunter","name":"Threat Hunter","description":"Defeat 10 bosses or mini bosses.","stat":"bosses","target":10,"reward":120},
+  {"id":"field-veteran","name":"Field Veteran","description":"Survive for a total of 60 minutes.","stat":"timePlayed","target":3600,"reward":140},
+  {"id":"adaptation-chain","name":"Adaptation Chain","description":"Equip 30 field upgrades.","stat":"cardsPicked","target":30,"reward":100},
+  {"id":"peak-signal","name":"Peak Signal","description":"Reach level 15 during one run.","stat":"highestLevel","target":15,"reward":150},
+  {"id":"beyond-the-clock","name":"Beyond the Clock","description":"Survive 10 minutes in Endless Drift.","stat":"endlessTime","target":600,"reward":250}
+]

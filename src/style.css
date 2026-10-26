@@ -449,6 +449,36 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}#
 .settings-panel .install-setting strong{min-width:74px;color:var(--cyan)}
 .settings-panel .install-setting button{min-width:150px;min-height:46px;margin:0;padding:10px 15px;background:var(--cyan);color:#0b1714;font:800 13px 'Barlow Condensed';letter-spacing:.08em}
 .settings-panel .install-setting button:disabled{background:#2b3a34;color:#7f9289;cursor:default}
+.game-settings .settings-control{position:relative}
+.game-settings .settings-toggle,.game-settings .settings-select{min-width:112px;min-height:44px;margin:0;border:1px solid #53635c;background:#0c1512;color:#a8b8b1;font:800 13px 'Barlow Condensed';letter-spacing:.12em;text-align:center}
+.game-settings .settings-toggle.active{border-color:var(--cyan);background:#18342e;color:var(--cyan);box-shadow:inset 3px 0 0 var(--cyan)}
+.game-settings .settings-toggle:focus-visible,.game-settings .settings-select:focus-visible,.game-settings input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.game-settings .settings-select{
+ appearance:none;-webkit-appearance:none;padding:0 38px 0 12px;color:#eef7f3;cursor:pointer;
+ background-color:#0c1512;
+ background-image:linear-gradient(45deg,transparent 48%,var(--cyan) 49% 68%,transparent 69%),linear-gradient(135deg,transparent 48%,var(--cyan) 49% 68%,transparent 69%),linear-gradient(90deg,transparent,#ffffff18,transparent);
+ background-position:calc(100% - 17px) 50%,calc(100% - 11px) 50%,calc(100% - 31px) 50%;
+ background-size:7px 7px,7px 7px,1px 58%;background-repeat:no-repeat
+}
+.game-settings .settings-select:hover{border-color:#69e0d099;background-color:#11231e}
+.game-settings .settings-range{display:grid;grid-template-columns:minmax(100px,180px) 48px;align-items:center;gap:10px}
+.game-settings .settings-range input{width:100%;accent-color:var(--cyan)}
+.game-settings .settings-range input:disabled{opacity:.32}
+.game-settings .settings-range output{color:var(--cyan);font:800 14px 'Barlow Condensed';text-align:right}
+.game-settings .settings-note{grid-column:1/-1;margin:2px 0 0;color:#7f938a;font:700 9px 'Chakra Petch';letter-spacing:.14em;text-align:center}
+@media(max-width:700px){
+ .game-settings .settings-control{grid-template-columns:minmax(0,1fr) auto;min-height:72px;padding:10px 12px}
+ .game-settings .settings-toggle,.game-settings .settings-select{min-width:96px;min-height:42px}
+ .game-settings .settings-range{grid-template-columns:minmax(80px,1fr) 40px;width:min(45vw,190px)}
+}
+@media(max-height:520px) and (orientation:landscape){
+ .game-settings{padding-top:8px;padding-bottom:12px;gap:5px}
+ .game-settings:before{display:none}
+ .game-settings .settings-control{min-height:56px;padding:7px 10px}
+ .game-settings .settings-control small{display:none}
+ .game-settings .layout-setting,.game-settings .install-setting{min-height:58px}
+ .game-settings>button{min-height:38px;margin-top:0}
+}
 @media(max-width:620px){
  .settings-panel .install-setting{grid-template-columns:1fr auto}
  .settings-panel .install-setting button{grid-column:1/-1;width:100%}
@@ -493,9 +523,9 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}#
 .level-badge{display:grid;grid-template-columns:auto minmax(180px,1fr);align-items:center;gap:8px;width:min(38vw,440px);padding:3px 10px}.level-badge>span{white-space:nowrap}
 .run-loadout{top:max(62px,calc(env(safe-area-inset-top) + 54px));right:max(8px,env(safe-area-inset-right));left:auto;transform-origin:right top}.run-loadout.collapsed{transform:translateX(calc(100% + 20px)) scale(.97)}
 
-/* Five choices fit the battlefield width; details replace the card face on selection. */
+/* Six varied choices fit wide screens; constrained devices keep a usable rail. */
 @media (orientation:landscape){
- .card-screen .card-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-flow:row;grid-auto-columns:auto;width:100%;max-width:1480px;overflow:hidden;gap:clamp(5px,1vw,12px);padding:4px 0 7px;scroll-snap-type:none}
+ .card-screen .card-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row;grid-auto-columns:auto;width:100%;max-width:1580px;overflow:hidden;gap:clamp(5px,.8vw,10px);padding:4px 0 7px;scroll-snap-type:none}
  .card-screen .upgrade-card{width:100%;min-width:0;min-height:0;height:auto;max-height:none}
  .card-screen.weapon-draft .card-grid{grid-template-columns:repeat(3,minmax(0,1fr));width:min(100%,900px)}
  .card-screen.weapon-upgrade-draft .card-grid{grid-template-columns:repeat(2,minmax(0,320px));justify-content:center;width:min(100%,760px)}
@@ -505,7 +535,7 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}#
  .menu-topline{padding-bottom:7px}.brand-compact h1{font-size:25px}.menu-brief h2{font-size:clamp(45px,7.2vw,68px);margin:4px 0 7px}.menu-brief>p{font-size:8px;line-height:1.35}.mission-strip{margin:8px 0 6px}.mission-strip span{padding:6px 8px}.mission-strip b{font-size:10px}.menu-brief .hero-button{min-height:48px;padding:7px 13px}.menu-brief .hero-button span{font-size:18px}.menu-brief .hero-button>b{font-size:29px}
  .command-deck .operative-card{width:min(100%,285px);padding:8px}.operative-label{padding-bottom:5px;font-size:6px}.operative-card .portrait-shape:before{box-shadow:0 50px 0 18px #18221f}.operative-card .portrait-shape b{font-size:38px}.operative-meta span{padding:5px 7px}.operative-meta b{font-size:9px}.command-nav button{min-height:46px;padding:6px 8px}.command-nav .glyph{font-size:16px}.command-nav button span{font-size:13px}.command-deck footer{padding-top:4px}
  .hud-top{grid-template-columns:minmax(170px,27vw) minmax(220px,1fr) auto;gap:6px}.hp-cluster{min-height:42px}.run-clock{width:min(100%,430px);padding:0 7px 3px}.run-stage-name{font-size:5px}.run-clock>div:nth-child(2)>b{font-size:17px}.run-clock>div:nth-child(2)>small{font-size:6px}.phase-track{height:17px}.phase-track b{width:17px;height:17px;font-size:6px}.hud-command .kill-count span{min-width:36px;font-size:9px}.hud-command .loadout-toggle,.hud-command .pause-btn{width:42px;height:42px;min-width:42px}.hud-command .loadout-toggle span{width:23px;height:23px;font-size:14px}.level-badge{width:min(42vw,400px)}
- .card-screen{padding:max(7px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));grid-template-rows:auto minmax(0,1fr) auto}.card-screen .card-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;overflow:hidden}.card-screen .upgrade-card{padding:8px}.card-screen .card-icon{width:34px;height:34px;margin:2px 0;font-size:16px}.card-screen .upgrade-card h3{font-size:15px}.card-screen .tag{font-size:6px;padding:2px 4px}.card-screen .card-detail{padding:7px 5px}.card-screen .card-detail p{font-size:7px;line-height:1.25;margin-top:5px}.card-screen footer button{min-height:36px}
+ .card-screen{padding:max(7px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));grid-template-rows:auto minmax(0,1fr) auto}.card-screen .card-grid{grid-template-columns:repeat(6,minmax(145px,1fr));gap:5px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity}.card-screen .upgrade-card{padding:8px;scroll-snap-align:start}.card-screen .card-icon{width:34px;height:34px;margin:2px 0;font-size:16px}.card-screen .upgrade-card h3{font-size:15px}.card-screen .tag{font-size:6px;padding:2px 4px}.card-screen .card-detail{padding:7px 5px}.card-screen .card-detail p{font-size:7px;line-height:1.25;margin-top:5px}.card-screen footer button{min-height:36px}
 }
 
 /* Survivor Lab v2: compact horizontal roster and contextual talent inspector. */
@@ -631,6 +661,15 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}#
 .combat-hud .loadout-toggle{display:grid}.combat-hud .loadout-toggle span{width:24px;height:24px;font-size:14px}.combat-hud .loadout-toggle small{bottom:-7px}
 .combat-hud+.level-badge{display:none}
 
+/* On desktop the encounter timeline is anchored to the viewport, independent
+   of the unequal player and utility clusters. Mobile keeps its fitted grid. */
+@media (min-width:1101px) and (min-height:601px){
+ .combat-hud{display:flex;justify-content:space-between;align-items:flex-start}
+ .combat-hud .hp-cluster{width:min(28vw,520px);flex:0 1 520px}
+ .combat-hud .run-clock{position:absolute;top:0;left:50%;width:min(38vw,620px);transform:translateX(-50%)}
+ .combat-hud .hud-command{margin-left:auto}
+}
+
 @media (orientation:landscape) and (max-height:600px){
  .clean-character-layout{height:calc(100dvh - 58px);grid-template-rows:52px minmax(0,1fr)}
  .character-roster{padding:5px 8px;gap:3px}.character-roster button{padding:3px 6px}.character-roster button>b{font-size:11px}
@@ -647,3 +686,93 @@ html,body,#app{width:100%;height:100%;min-height:100%;overscroll-behavior:none}#
  .character-roster button{padding-inline:3px}.character-roster button>b{display:block;font-size:9px}
  .combat-hud{grid-template-columns:minmax(150px,34vw) minmax(150px,1fr) auto}.combat-hud .run-stage-name{display:none}.combat-hud .kill-count small{display:none}.combat-hud .kill-count span{min-width:30px}.combat-hud .loadout-toggle{display:none}
 }
+
+/* Immersion pass: upgrades remain readable without covering the arena. */
+.upgrade-radar{
+ position:absolute;z-index:9;top:max(72px,calc(env(safe-area-inset-top) + 64px));left:max(12px,env(safe-area-inset-left));display:flex;gap:5px;max-width:min(58vw,430px);padding:4px;pointer-events:none;opacity:0;transform:translateY(-5px);transition:opacity .2s,transform .2s
+}
+.upgrade-radar.show{opacity:1;transform:none}
+.upgrade-radar>span{position:relative;display:grid;place-items:center;width:31px;height:31px;background:#07110ee8;border:1px solid color-mix(in srgb,var(--effect-color),transparent 35%);box-shadow:inset 0 -2px color-mix(in srgb,var(--effect-color),transparent 25%),0 5px 14px #0008;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,0 100%)}
+.upgrade-radar i{color:var(--effect-color);font:700 13px 'Barlow Condensed';font-style:normal;text-shadow:0 0 8px var(--effect-color)}
+.upgrade-radar b{position:absolute;right:2px;bottom:1px;min-width:11px;height:11px;padding:0 2px;display:grid;place-items:center;border-radius:7px;background:var(--effect-color);color:#07100d;font:800 7px 'Chakra Petch'}
+.upgrade-toast-layer{position:absolute;z-index:26;left:50%;top:18%;width:min(430px,72vw);transform:translateX(-50%);pointer-events:none}
+.upgrade-toast{position:relative;display:grid;grid-template-columns:54px 1fr;align-items:center;gap:12px;padding:11px 20px 11px 12px;color:#edf7f2;background:linear-gradient(90deg,color-mix(in srgb,var(--upgrade-color),#07110e 74%),#07110ef2 72%,transparent);border-block:1px solid color-mix(in srgb,var(--upgrade-color),transparent 35%);clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));animation:upgrade-toast-in .48s cubic-bezier(.16,1,.3,1) both;filter:drop-shadow(0 13px 20px #000a)}
+.upgrade-toast:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--upgrade-color);box-shadow:0 0 16px var(--upgrade-color);transform-origin:left;animation:upgrade-toast-line 2.1s linear both}
+.upgrade-toast>i{display:grid;place-items:center;width:50px;height:50px;border:1px solid var(--upgrade-color);color:var(--upgrade-color);background:#06100dc7;font:700 24px 'Barlow Condensed';font-style:normal;box-shadow:inset 0 0 18px color-mix(in srgb,var(--upgrade-color),transparent 80%),0 0 20px color-mix(in srgb,var(--upgrade-color),transparent 75%);animation:upgrade-icon-pulse .8s ease-out}
+.upgrade-toast span{display:grid;grid-template-columns:1fr auto;align-items:end;min-width:0}.upgrade-toast small{grid-column:1/-1;color:var(--upgrade-color);font:700 7px 'Chakra Petch';letter-spacing:.22em}.upgrade-toast b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 23px 'Barlow Condensed';letter-spacing:.02em}.upgrade-toast em{color:#c4d2cb;font:700 8px 'Chakra Petch';font-style:normal;letter-spacing:.12em}.upgrade-toast.leaving{animation:upgrade-toast-out .35s ease-in forwards}
+.game-host.upgrade-acquired:after{content:"";position:absolute;z-index:7;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 58%,color-mix(in srgb,var(--upgrade-color,#69e0d0),transparent 82%),transparent 42%);animation:upgrade-screen-pulse .7s ease-out both}
+@keyframes upgrade-toast-in{from{opacity:0;transform:translateY(-22px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes upgrade-toast-out{to{opacity:0;transform:translateY(-10px) scale(.97)}}
+@keyframes upgrade-toast-line{from{transform:scaleX(0)}12%{transform:scaleX(1)}to{transform:scaleX(0)}}
+@keyframes upgrade-icon-pulse{0%{transform:scale(.62) rotate(-12deg)}55%{transform:scale(1.14) rotate(3deg)}100%{transform:none}}
+@keyframes upgrade-screen-pulse{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+
+.loadout-armory{padding-bottom:8px;border-bottom:1px solid #ffffff12}.loadout-compact{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}.loadout-chip{display:grid;grid-template-columns:22px minmax(0,1fr) 16px;align-items:center;gap:6px;min-width:132px;flex:1;padding:5px 7px;background:#07110dbd;border:1px solid color-mix(in srgb,var(--slot-color),transparent 72%)}.loadout-chip i{display:grid;place-items:center;width:22px;height:22px;color:var(--slot-color);font-style:normal}.loadout-chip b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 10px 'Barlow Condensed'}.loadout-chip small{display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--slot-color);color:#07100d;font:800 7px 'Chakra Petch'}
+
+.hud-pop{animation:hud-value-pop .34s cubic-bezier(.2,1.6,.4,1);color:#fff!important;text-shadow:0 0 12px #ffc65c}.level-pop{animation:level-value-pop .58s cubic-bezier(.16,1,.3,1);color:#fff!important;text-shadow:0 0 14px #69e0d0}.action.skill.just-ready{animation:skill-ready-signal .65s cubic-bezier(.16,1,.3,1)}
+@keyframes hud-value-pop{50%{transform:scale(1.42)}}
+@keyframes level-value-pop{40%{transform:scale(1.8);color:#69e0d0}100%{transform:none}}
+@keyframes skill-ready-signal{0%{filter:brightness(1)}35%{filter:brightness(1.75);box-shadow:0 0 0 12px #69e0d026,0 0 28px #69e0d08a}100%{filter:brightness(1)}}
+
+.card-screen .upgrade-card.selected{animation:card-lock-in .24s cubic-bezier(.16,1,.3,1);box-shadow:0 0 0 1px var(--h),0 0 26px color-mix(in srgb,var(--h),transparent 68%)}
+.card-screen .upgrade-card.selected .card-icon{animation:card-icon-lock .4s cubic-bezier(.2,1.5,.4,1)}
+@keyframes card-lock-in{from{transform:translateY(7px) scale(.97)}to{transform:none}}
+@keyframes card-icon-lock{40%{transform:scale(1.22) rotate(6deg)}to{transform:none}}
+
+@media (orientation:landscape) and (max-height:600px){
+ .upgrade-radar{top:max(57px,calc(env(safe-area-inset-top) + 51px));gap:3px}.upgrade-radar>span{width:26px;height:26px}.upgrade-radar i{font-size:11px}.upgrade-toast-layer{top:14%;width:min(380px,66vw)}.upgrade-toast{grid-template-columns:42px 1fr;padding:8px 15px 8px 9px}.upgrade-toast>i{width:39px;height:39px;font-size:19px}.upgrade-toast b{font-size:19px}.upgrade-toast small{font-size:6px}
+}
+@media (max-width:720px) and (orientation:landscape){.upgrade-radar>span:nth-child(n+6){display:none}}
+@media (prefers-reduced-motion:reduce){.upgrade-toast,.upgrade-toast:after,.upgrade-toast>i,.game-host.upgrade-acquired:after,.hud-pop,.level-pop,.action.skill.just-ready,.card-screen .upgrade-card.selected,.card-screen .upgrade-card.selected .card-icon{animation-duration:.01ms!important;animation-iteration-count:1!important}.upgrade-radar{transition:none}}
+
+/* Desktop card drafts keep one stable row. Selecting a card swaps its content
+   in place instead of lifting it out of alignment with the other choices. */
+@media (hover:hover) and (min-width:900px){
+ .card-screen .upgrade-card.selected{transform:none}
+ .card-screen .upgrade-card:hover:not(.selected){transform:translateY(-4px)}
+ .card-screen .card-detail{padding:0;border:0;background:transparent}
+}
+
+/* Short desktop windows need a dedicated composition. This preserves the
+   title, countdown, card bodies, and actions instead of allowing the middle
+   row to push the header and footer beyond the visible viewport. */
+@media (hover:hover) and (min-width:1000px) and (max-height:520px){
+ .card-screen{padding:6px 28px;gap:4px;grid-template-rows:42px minmax(0,1fr) 42px}
+ .card-screen header{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;column-gap:12px;text-align:left}
+ .card-screen header>small{grid-column:1;font-size:7px;line-height:1}.card-screen h2{grid-column:1;grid-row:2;font-size:21px;line-height:1;margin:0}
+ .card-countdown{grid-column:2;grid-row:1/3;width:32px;height:32px;margin:0;font-size:15px}
+ .run-balance{grid-column:3;grid-row:1/3;margin:0;font-size:8px;white-space:nowrap}
+ .card-screen .card-grid{height:100%;min-height:0;margin:0 auto;padding:2px 0 3px;align-items:stretch}
+ .card-screen .upgrade-card,.card-screen.weapon-draft .upgrade-card,.card-screen.weapon-upgrade-draft .upgrade-card{height:100%;min-height:0;max-height:none;padding:9px 10px;transform:none}
+ .card-screen .card-icon{width:38px;height:38px;margin:5px 0;font-size:18px}.card-screen .upgrade-card h3{font-size:18px;margin:3px 0 5px}
+ .card-screen .upgrade-card .stars,.card-screen .upgrade-card .card-summary>.stars{bottom:8px;left:10px;font-size:9px}
+ .card-screen .card-detail{padding:4px 1px}.card-screen .card-detail p{margin-top:7px;font-size:8px;line-height:1.3}
+ .card-screen footer{align-items:stretch;gap:5px}.card-screen footer button{min-height:38px;padding:5px 16px}
+}
+
+/* Desktop drafts use the available play-space instead of collapsing into a
+   thin strip. The selected card keeps the same footprint while its face
+   changes to the detail view. */
+@media (hover:hover) and (min-width:1000px) and (min-height:521px){
+ .card-screen{grid-template-rows:auto minmax(0,1fr) auto;padding:clamp(22px,4vh,46px) clamp(28px,3.5vw,72px)}
+ .card-screen .card-grid{width:min(94vw,1900px);max-width:1900px;height:100%;min-height:0;margin:0 auto;align-items:center;overflow:visible}
+ .card-screen .upgrade-card{height:clamp(330px,54vh,520px);min-height:330px;padding:clamp(15px,1.3vw,24px)}
+ .card-screen .card-icon{width:clamp(58px,4.2vw,76px);height:clamp(58px,4.2vw,76px);font-size:clamp(26px,2vw,36px);margin:clamp(15px,2vh,25px) 0}
+ .card-screen .upgrade-card h3{font-size:clamp(22px,1.7vw,31px)}
+ .card-screen .card-detail{padding:6px 2px}.card-screen .card-detail p{font-size:clamp(10px,.78vw,14px);line-height:1.55}
+ .card-screen.weapon-draft .card-grid{width:min(88vw,1050px)}
+ .card-screen.weapon-upgrade-draft .card-grid{width:min(80vw,780px)}
+}
+
+/* Career records and field database. These are deep-menu surfaces, keeping the
+   live arena free of permanent reference panels. */
+.clean-nav{grid-template-columns:repeat(5,minmax(0,1fr))}
+.clean-nav button{justify-content:center;padding-inline:9px}.clean-nav button span{font-size:14px;white-space:nowrap}.clean-nav button em{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:4px;border-radius:50%;background:var(--amber);color:#102019;font:800 10px 'Chakra Petch';font-style:normal}
+.objectives-page{width:min(1320px,100%);margin:0 auto;padding:clamp(18px,3vw,42px);display:grid;gap:32px}
+.career-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.career-summary span{min-height:70px;padding:13px 16px;background:#101b18;border-top:2px solid #69e0d055}.career-summary small,.section-heading small,.objective-card small,.almanac-detail small,.almanac-list small{display:block;color:#789087;font:700 8px 'Chakra Petch';letter-spacing:.14em}.career-summary b{display:block;margin-top:4px;font:800 24px 'Barlow Condensed';color:#eff8f4}
+.section-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:10px}.section-heading h2{margin:2px 0 0;font:800 28px 'Barlow Condensed';letter-spacing:.06em}.section-heading>b{color:var(--cyan);font-size:12px}
+.objective-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.objective-card{min-height:118px;padding:14px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:13px;align-items:center;background:#101a17;border:1px solid #ffffff12;opacity:.68}.objective-card.complete{opacity:1;border-color:#69e0d044;background:linear-gradient(100deg,#10241e,#101a17)}.objective-card>i{width:38px;height:38px;display:grid;place-items:center;border:1px solid #53635c;border-radius:50%;color:#8ca098;font:800 18px 'Barlow Condensed';font-style:normal}.objective-card.complete>i{border-color:var(--cyan);color:var(--cyan)}.objective-card h3{margin:2px 0;font:800 19px 'Barlow Condensed'}.objective-card p{margin:0 0 8px;color:#8fa299;font-size:9px}.objective-card>b{color:var(--amber);font:800 13px 'Chakra Petch'}.objective-progress{height:4px;background:#07100d}.objective-progress span{display:block;height:100%;background:var(--cyan)}.objective-card em{display:block;margin-top:4px;color:#81978d;font:700 8px 'Chakra Petch';font-style:normal}.objective-card button{min-width:74px;min-height:38px;padding:8px;background:var(--amber);color:#102019;font:800 11px 'Barlow Condensed'}.objective-card button:disabled{background:#1c2924;color:#66776f}.achievement-unlock{position:fixed;left:50%;top:max(18px,env(safe-area-inset-top));z-index:40;transform:translateX(-50%);min-width:min(420px,88vw);padding:12px 18px;background:#10241f;border:1px solid var(--amber);box-shadow:0 12px 42px #000b;text-align:center;animation:upgrade-toast-in .3s both}.achievement-unlock small,.achievement-unlock b,.achievement-unlock span{display:block}.achievement-unlock small{color:var(--amber);font-size:8px;letter-spacing:.16em}.achievement-unlock b{margin:3px 0;font:800 20px 'Barlow Condensed'}.achievement-unlock span{color:#8ca198;font-size:8px}
+
+.almanac-page{height:calc(100dvh - 72px);display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}.almanac-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;padding:10px clamp(16px,4vw,56px);background:#0b1412;border-bottom:1px solid var(--line)}.almanac-tabs button{min-height:42px;padding:7px 10px;background:#111d19;color:#80938a;font:800 12px 'Barlow Condensed';letter-spacing:.08em;text-transform:uppercase}.almanac-tabs button.active{background:#1d332b;color:var(--cyan);box-shadow:inset 0 -2px var(--cyan)}.almanac-tabs small{display:inline;margin-left:6px;color:#667a71;font-size:7px}.almanac-browser{min-height:0;display:grid;grid-template-columns:minmax(240px,32%) minmax(0,1fr)}.almanac-list{padding:12px;overflow:auto;background:#0b1412;scrollbar-width:thin}.almanac-list button{width:100%;min-height:58px;padding:8px 12px;display:grid;grid-template-columns:5px 1fr;gap:12px;align-items:center;background:#111b18;border:1px solid transparent;text-align:left}.almanac-list button+button{margin-top:4px}.almanac-list button>i{height:34px;background:var(--entry-color)}.almanac-list button.active{border-color:var(--entry-color);background:#1a2823}.almanac-list b{display:block;margin-top:2px;font:800 16px 'Barlow Condensed';color:#eef7f3}.almanac-detail{position:relative;min-width:0;padding:clamp(24px,5vw,72px);overflow:auto;background:radial-gradient(circle at 78% 20%,color-mix(in srgb,var(--entry-color),transparent 78%),transparent 36%)}.almanac-detail:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--entry-color)}.almanac-detail header{max-width:760px}.almanac-detail header>small{color:var(--entry-color)}.almanac-detail h2{margin:5px 0 8px;font:800 clamp(42px,6vw,76px)/.9 'Barlow Condensed'}.almanac-detail header p{color:#a7b7b0;font-size:12px;line-height:1.55}.almanac-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:24px 0}.almanac-facts span{min-height:62px;padding:11px;background:#101b18;border-top:1px solid color-mix(in srgb,var(--entry-color),transparent 45%)}.almanac-facts b{display:block;margin-top:5px;font:700 14px 'Barlow Condensed';text-transform:capitalize}.almanac-detail>section{max-width:780px;padding:18px;background:#0b1412aa;border:1px solid #ffffff0d}.almanac-detail>section>small{color:var(--entry-color)}.almanac-detail>section p{margin:9px 0 0;padding:8px 10px;background:#ffffff06;color:#c4d0cb;font-size:10px;line-height:1.4}
+@media(max-width:900px){.clean-nav{grid-template-columns:repeat(5,minmax(0,1fr))}.clean-nav .glyph{display:none}.clean-nav button span{font-size:11px}.objective-grid{grid-template-columns:1fr}.almanac-browser{grid-template-columns:minmax(190px,34%) minmax(0,1fr)}.almanac-facts{grid-template-columns:repeat(2,1fr)}}
+@media(orientation:landscape) and (max-height:600px){.clean-nav{margin-top:5px}.clean-nav button{min-height:42px;padding:5px}.objectives-page{padding:12px 18px;gap:18px}.career-summary span{min-height:52px;padding:7px 10px}.career-summary b{font-size:18px}.objective-card{min-height:94px;padding:9px}.objective-card p{margin-bottom:5px}.almanac-page{height:calc(100dvh - 58px)}.almanac-tabs{padding:6px 12px}.almanac-tabs button{min-height:34px}.almanac-list{padding:7px}.almanac-list button{min-height:46px}.almanac-detail{padding:18px 28px}.almanac-detail h2{font-size:42px}.almanac-detail header p{font-size:9px}.almanac-facts{margin:12px 0}.almanac-facts span{min-height:48px;padding:7px}.almanac-detail>section{padding:11px}.almanac-detail>section p{margin-top:5px;padding:5px 8px}}

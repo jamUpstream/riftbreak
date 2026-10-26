@@ -1,0 +1,8 @@
+[
+  {"id":"three-deployments","name":"Field Rotation","description":"Complete 3 deployments.","stat":"runs","target":3,"reward":75},
+  {"id":"hostile-quota","name":"Hostile Quota","description":"Eliminate 500 hostiles.","stat":"kills","target":500,"reward":125},
+  {"id":"core-breakers","name":"Core Breakers","description":"Defeat 5 bosses or mini bosses.","stat":"bosses","target":5,"reward":100},
+  {"id":"salvage-route","name":"Salvage Route","description":"Collect 300 run coins.","stat":"coinsCollected","target":300,"reward":100},
+  {"id":"rapid-adaptation","name":"Rapid Adaptation","description":"Choose 20 upgrade cards.","stat":"cardsPicked","target":20,"reward":80},
+  {"id":"combat-rhythm","name":"Combat Rhythm","description":"Accumulate 30 minutes of survival time.","stat":"timePlayed","target":1800,"reward":90}
+]
